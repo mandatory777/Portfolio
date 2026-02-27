@@ -1230,22 +1230,20 @@ body.cursor-hover .cursor-ring {
   position: relative;
 }
 
-.about-photo-placeholder {
+.about-photo-img {
   width: 240px;
   height: 240px;
-  background: var(--surface);
+  object-fit: cover;
   border: 2px solid var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--accent);
+  display: block;
   position: relative;
 }
 
-.about-photo-placeholder::before {
+.about-photo-img + .about-photo-sticker {
+  /* sticker still works */
+}
+
+.about-photo::before {
   content: "";
   position: absolute;
   inset: -8px;
@@ -1463,7 +1461,7 @@ body.cursor-hover .cursor-ring {
   }
 
   .about-photo { margin: 0 auto; }
-  .about-photo-placeholder { width: 180px; height: 180px; margin: 0 auto; }
+  .about-photo-img { width: 180px; height: 180px; margin: 0 auto; }
   .about-photo-sticker { right: -10px; }
 
   .contact-container {
