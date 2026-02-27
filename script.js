@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Color coding */
     let color;
-    if (perfScore >= 90) color = "#c8ff00";
+    if (perfScore >= 90) color = "#b4a7f5";
     else if (perfScore >= 50) color = "#f59e0b";
     else color = "#ff3cac";
     perfRingFill.style.stroke = color;

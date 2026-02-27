@@ -18,7 +18,7 @@
   --text:       #e8e4de;
   --text-mid:   #9a9590;
   --text-dim:   #5a5550;
-  --accent:     #c8ff00;
+  --accent:     #b4a7f5;
   --accent-2:   #ff3cac;
   --accent-3:   #6366f1;
   --cream:      #f5f0e8;
@@ -269,7 +269,7 @@ body.cursor-hover .cursor-ring {
 }
 
 .nav.scrolled {
-  box-shadow: 0 0 40px rgba(200, 255, 0, 0.03);
+  box-shadow: 0 0 40px rgba(180, 167, 245, 0.03);
 }
 
 .nav-inner {
@@ -827,12 +827,12 @@ body.cursor-hover .cursor-ring {
 
 .bug-option:hover {
   border-color: var(--accent);
-  background: rgba(200, 255, 0, 0.05);
+  background: rgba(180, 167, 245, 0.05);
 }
 
 .bug-option.correct {
   border-color: var(--accent);
-  background: rgba(200, 255, 0, 0.1);
+  background: rgba(180, 167, 245, 0.1);
   color: var(--accent);
 }
 
@@ -861,7 +861,7 @@ body.cursor-hover .cursor-ring {
 }
 
 .bug-feedback.success {
-  background: rgba(200, 255, 0, 0.06);
+  background: rgba(180, 167, 245, 0.06);
   border-left: 3px solid var(--accent);
   color: var(--text);
 }
@@ -904,7 +904,7 @@ body.cursor-hover .cursor-ring {
   transition: all var(--transition);
 }
 
-.bug-next-btn:hover { background: #b8e600; }
+.bug-next-btn:hover { background: #a090e0; }
 
 .bug-score {
   text-align: center;
@@ -935,7 +935,7 @@ body.cursor-hover .cursor-ring {
   transition: background var(--transition);
 }
 
-.bug-restart-btn:hover { background: #b8e600; }
+.bug-restart-btn:hover { background: #a090e0; }
 
 /* --- Performance Optimizer --- */
 .perf-layout {
@@ -963,7 +963,7 @@ body.cursor-hover .cursor-ring {
 
 .perf-toggle.active {
   border-color: var(--accent);
-  background: rgba(200, 255, 0, 0.04);
+  background: rgba(180, 167, 245, 0.04);
 }
 
 .perf-toggle-label {
@@ -1016,7 +1016,7 @@ body.cursor-hover .cursor-ring {
 }
 
 .switch input:checked + .switch-slider {
-  background: rgba(200, 255, 0, 0.2);
+  background: rgba(180, 167, 245, 0.2);
 }
 
 .switch input:checked + .switch-slider::after {
@@ -1112,12 +1112,12 @@ body.cursor-hover .cursor-ring {
 
 .myth-btn:hover {
   border-color: var(--accent);
-  background: rgba(200, 255, 0, 0.05);
+  background: rgba(180, 167, 245, 0.05);
 }
 
 .myth-btn.correct {
   border-color: var(--accent);
-  background: rgba(200, 255, 0, 0.1);
+  background: rgba(180, 167, 245, 0.1);
   color: var(--accent);
 }
 
@@ -1142,7 +1142,7 @@ body.cursor-hover .cursor-ring {
 }
 
 .myth-feedback.success {
-  background: rgba(200, 255, 0, 0.06);
+  background: rgba(180, 167, 245, 0.06);
   border-left: 3px solid var(--accent);
   color: var(--text);
 }
@@ -1185,7 +1185,7 @@ body.cursor-hover .cursor-ring {
   transition: background var(--transition);
 }
 
-.myth-next-btn:hover { background: #b8e600; }
+.myth-next-btn:hover { background: #a090e0; }
 
 .myth-score {
   text-align: center;
@@ -1216,7 +1216,7 @@ body.cursor-hover .cursor-ring {
   transition: background var(--transition);
 }
 
-.myth-restart-btn:hover { background: #b8e600; }
+.myth-restart-btn:hover { background: #a090e0; }
 
 /* ========== ABOUT ========== */
 .about-grid {
