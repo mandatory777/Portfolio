@@ -1,9 +1,39 @@
 /* ============================================
    PORTFOLIO — script.js
-   Navigation, animations, skills, and mini-games
+   Navigation, animations, skills, mini-games,
+   custom cursor & grungy effects
    ============================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  /* ---------- CUSTOM CURSOR ---------- */
+  const cursorDot = document.getElementById("cursor-dot");
+  const cursorRing = document.getElementById("cursor-ring");
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.left = mouseX + "px";
+    cursorDot.style.top = mouseY + "px";
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+    cursorRing.style.left = ringX + "px";
+    cursorRing.style.top = ringY + "px";
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  /* Cursor hover state on interactive elements */
+  const hoverTargets = document.querySelectorAll("a, button, input, textarea, .skill-tile, .work-card");
+  hoverTargets.forEach((el) => {
+    el.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
+    el.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
+  });
 
   /* ---------- SCROLL ANIMATIONS ---------- */
   const observer = new IntersectionObserver(
@@ -49,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navAnchors = document.querySelectorAll(".nav-links a");
 
   window.addEventListener("scroll", () => {
-    const scrollY = window.scrollY + 120;
+    const scrollY = window.scrollY + 140;
     sections.forEach((section) => {
       const top = section.offsetTop;
       const height = section.offsetHeight;
@@ -60,6 +90,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  /* ---------- SUBTLE PARALLAX ON HERO BG TEXT ---------- */
+  const heroBgText = document.querySelector(".hero-bg-text");
+  if (heroBgText) {
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      heroBgText.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.3}px))`;
+    });
+  }
 
   /* ========================================
      SKILLS
@@ -106,6 +145,10 @@ document.addEventListener("DOMContentLoaded", () => {
       skillDetail.hidden = false;
       skillDetail.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
+
+    /* Cursor hover for dynamically added elements */
+    tile.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
+    tile.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
 
     skillsGrid.appendChild(tile);
     observer.observe(tile);
@@ -343,9 +386,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Color coding */
     let color;
-    if (perfScore >= 90) color = "#10b981";
+    if (perfScore >= 90) color = "#c8ff00";
     else if (perfScore >= 50) color = "#f59e0b";
-    else color = "#ef4444";
+    else color = "#ff3cac";
     perfRingFill.style.stroke = color;
     perfScoreText.style.color = color;
   }

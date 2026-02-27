@@ -4,9 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Amanda Davis — Software Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- Grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Custom cursor dot -->
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
 
   <!-- ========== NAVIGATION ========== -->
   <nav class="nav" id="nav">
@@ -16,44 +26,66 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#play">Play</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#work" data-text="Work">Work</a></li>
+        <li><a href="#skills" data-text="Skills">Skills</a></li>
+        <li><a href="#play" data-text="Play">Play</a></li>
+        <li><a href="#about" data-text="About">About</a></li>
+        <li><a href="#contact" data-text="Contact">Contact</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- ========== HERO ========== -->
   <section class="hero" id="hero">
-    <div class="hero-blob"></div>
+    <div class="hero-bg-text" aria-hidden="true">CREATIVE DEV</div>
     <div class="hero-content">
-      <h1 class="hero-title fade-up">
-        I build intuitive applications<br>
-        <span class="accent">that solve real problems.</span>
+      <div class="hero-label fade-up">
+        <span class="tag">Software Developer</span>
+        <span class="tag tag-outline">Based in Canada</span>
+      </div>
+      <h1 class="hero-title fade-up" data-glitch="I build intuitive apps that solve real problems.">
+        I build intuitive apps<br>
+        that solve <span class="highlight">real problems</span><span class="accent">.</span>
       </h1>
       <p class="hero-subtitle fade-up delay-1">
         Full-stack developer with a customer service heart — empathy-driven code that people love to use.
       </p>
       <div class="hero-ctas fade-up delay-2">
-        <a href="#work" class="btn btn-primary">View Work</a>
-        <a href="#play" class="btn btn-outline">Play &amp; Explore</a>
+        <a href="#work" class="btn btn-primary">
+          <span>View Work</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#play" class="btn btn-outline">Play & Explore</a>
+      </div>
+      <div class="hero-scroll-hint fade-up delay-3" aria-hidden="true">
+        <div class="scroll-line"></div>
+        <span>scroll</span>
       </div>
     </div>
   </section>
 
+  <!-- ========== MARQUEE ========== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>HTML &bull; CSS &bull; JavaScript &bull; React &bull; Python &bull; Django &bull; Java &bull; Spring &bull; Bootstrap &bull; Git &bull;&nbsp;</span>
+      <span>HTML &bull; CSS &bull; JavaScript &bull; React &bull; Python &bull; Django &bull; Java &bull; Spring &bull; Bootstrap &bull; Git &bull;&nbsp;</span>
+    </div>
+  </div>
+
   <!-- ========== SELECTED WORK ========== -->
   <section class="section" id="work">
     <div class="container">
-      <h2 class="section-label fade-up">Selected Work</h2>
+      <div class="section-header fade-up">
+        <span class="section-number">01</span>
+        <h2 class="section-label">Selected Work</h2>
+      </div>
       <p class="section-subtitle fade-up">A few projects I'm proud of.</p>
       <div class="work-grid">
 
-        <article class="work-card fade-up">
+        <article class="work-card fade-up" data-tilt>
           <a href="https://github.com/mandatory777/hobbyhotspot" target="_blank" rel="noopener noreferrer">
             <div class="work-card-image">
-              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #6366f1, #a78bfa);">
+              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #c8ff00, #00ff87);">
                 <span>HobbyHotspot</span>
               </div>
               <div class="work-card-overlay">
@@ -64,14 +96,17 @@
               </div>
             </div>
           </a>
-          <h3>HobbyHotspot</h3>
-          <p>A community platform connecting people with shared interests</p>
+          <div class="work-card-info">
+            <h3>HobbyHotspot</h3>
+            <p>A community platform connecting people with shared interests</p>
+            <span class="work-card-arrow">&rarr;</span>
+          </div>
         </article>
 
-        <article class="work-card fade-up delay-1">
+        <article class="work-card fade-up delay-1" data-tilt>
           <a href="https://github.com/mandatory777/goat-project" target="_blank" rel="noopener noreferrer">
             <div class="work-card-image">
-              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">
+              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #ff3cac, #ff6b6b);">
                 <span>G.O.A.T</span>
               </div>
               <div class="work-card-overlay">
@@ -82,14 +117,17 @@
               </div>
             </div>
           </a>
-          <h3>G.O.A.T</h3>
-          <p>A polished HTML &amp; CSS showcase project</p>
+          <div class="work-card-info">
+            <h3>G.O.A.T</h3>
+            <p>A polished HTML &amp; CSS showcase project</p>
+            <span class="work-card-arrow">&rarr;</span>
+          </div>
         </article>
 
-        <article class="work-card fade-up delay-2">
+        <article class="work-card fade-up delay-2" data-tilt>
           <a href="https://jetrobertsbcca.github.io/animaladoption/" target="_blank" rel="noopener noreferrer">
             <div class="work-card-image">
-              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #10b981, #6ee7b7);">
+              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #6366f1, #a78bfa);">
                 <span>Paw Partners</span>
               </div>
               <div class="work-card-overlay">
@@ -100,8 +138,11 @@
               </div>
             </div>
           </a>
-          <h3>Paw Partners</h3>
-          <p>An animal adoption platform built with React</p>
+          <div class="work-card-info">
+            <h3>Paw Partners</h3>
+            <p>An animal adoption platform built with React</p>
+            <span class="work-card-arrow">&rarr;</span>
+          </div>
         </article>
 
       </div>
@@ -111,7 +152,10 @@
   <!-- ========== SKILLS ========== -->
   <section class="section section-alt" id="skills">
     <div class="container">
-      <h2 class="section-label fade-up">Skills</h2>
+      <div class="section-header fade-up">
+        <span class="section-number">02</span>
+        <h2 class="section-label">Skills</h2>
+      </div>
       <p class="section-subtitle fade-up">Click any skill to learn more.</p>
       <div class="skills-grid" id="skills-grid">
         <!-- Skills are rendered by JS -->
@@ -127,7 +171,10 @@
   <!-- ========== PLAY & EXPLORE ========== -->
   <section class="section" id="play">
     <div class="container">
-      <h2 class="section-label fade-up">Play &amp; Explore</h2>
+      <div class="section-header fade-up">
+        <span class="section-number">03</span>
+        <h2 class="section-label">Play & Explore</h2>
+      </div>
       <p class="section-subtitle fade-up">Quick interactive demos that show how I think about the web.</p>
 
       <div class="game-tabs fade-up">
@@ -193,9 +240,13 @@
     <div class="container about-grid">
       <div class="about-photo fade-up">
         <div class="about-photo-placeholder">AD</div>
+        <div class="about-photo-sticker" aria-hidden="true">creative coder</div>
       </div>
       <div class="about-text fade-up delay-1">
-        <h2 class="section-label">About Me</h2>
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <h2 class="section-label">About Me</h2>
+        </div>
         <p>
           I'm Amanda — a software developer with a background in customer service. That means I don't just write code — I build with <em>empathy</em>. I understand what it's like to be on the other side of the screen.
         </p>
@@ -213,10 +264,13 @@
   <section class="section" id="contact">
     <div class="container contact-container">
       <div class="contact-text fade-up">
-        <h2 class="section-label">Let's Work Together</h2>
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <h2 class="section-label">Let's Work Together</h2>
+        </div>
         <p>Have a project in mind? I'd love to hear about it. Whether you need a new site, a redesign, or just want to chat about an idea — drop me a line.</p>
         <p style="margin-top: 16px;">
-          <a href="mailto:andavis98@protonmail.com" class="accent" style="font-weight:600;">andavis98@protonmail.com</a>
+          <a href="mailto:andavis98@protonmail.com" class="email-link">andavis98@protonmail.com</a>
         </p>
       </div>
       <form class="contact-form fade-up delay-1" id="contact-form" action="#" method="POST">
@@ -232,7 +286,10 @@
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        <button type="submit" class="btn btn-primary btn-full">
+          <span>Send Message</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
         <p class="form-success" id="form-success" hidden>Thanks! I'll get back to you soon.</p>
       </form>
     </div>
@@ -241,7 +298,7 @@
   <!-- ========== FOOTER ========== -->
   <footer class="footer">
     <div class="container footer-inner">
-      <p>&copy; 2026 amanda<span class="accent">.</span>dev — Built with care.</p>
+      <p>&copy; 2026 amanda<span class="accent">.</span>dev — Built with care & caffeine.</p>
       <div class="footer-links">
         <a href="https://github.com/mandatory777" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
         <a href="https://www.linkedin.com/in/amanda-davis-7687b2221/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
