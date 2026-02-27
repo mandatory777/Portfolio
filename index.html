@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amanda Davis — Software Developer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">amanda<span class="accent">.</span>dev</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#play">Play</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-blob"></div>
+    <div class="hero-content">
+      <h1 class="hero-title fade-up">
+        I build intuitive applications<br>
+        <span class="accent">that solve real problems.</span>
+      </h1>
+      <p class="hero-subtitle fade-up delay-1">
+        Full-stack developer with a customer service heart — empathy-driven code that people love to use.
+      </p>
+      <div class="hero-ctas fade-up delay-2">
+        <a href="#work" class="btn btn-primary">View Work</a>
+        <a href="#play" class="btn btn-outline">Play &amp; Explore</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SELECTED WORK ========== -->
+  <section class="section" id="work">
+    <div class="container">
+      <h2 class="section-label fade-up">Selected Work</h2>
+      <p class="section-subtitle fade-up">A few projects I'm proud of.</p>
+      <div class="work-grid">
+
+        <article class="work-card fade-up">
+          <a href="https://github.com/mandatory777/hobbyhotspot" target="_blank" rel="noopener noreferrer">
+            <div class="work-card-image">
+              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #6366f1, #a78bfa);">
+                <span>HobbyHotspot</span>
+              </div>
+              <div class="work-card-overlay">
+                <div class="work-card-tech">
+                  <span>Python</span><span>Django</span><span>Bootstrap</span>
+                </div>
+                <p class="work-card-outcome">Platform connecting people through shared interests</p>
+              </div>
+            </div>
+          </a>
+          <h3>HobbyHotspot</h3>
+          <p>A community platform connecting people with shared interests</p>
+        </article>
+
+        <article class="work-card fade-up delay-1">
+          <a href="https://github.com/mandatory777/goat-project" target="_blank" rel="noopener noreferrer">
+            <div class="work-card-image">
+              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">
+                <span>G.O.A.T</span>
+              </div>
+              <div class="work-card-overlay">
+                <div class="work-card-tech">
+                  <span>HTML</span><span>CSS</span>
+                </div>
+                <p class="work-card-outcome">Clean, responsive front-end showcase</p>
+              </div>
+            </div>
+          </a>
+          <h3>G.O.A.T</h3>
+          <p>A polished HTML &amp; CSS showcase project</p>
+        </article>
+
+        <article class="work-card fade-up delay-2">
+          <a href="https://jetrobertsbcca.github.io/animaladoption/" target="_blank" rel="noopener noreferrer">
+            <div class="work-card-image">
+              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #10b981, #6ee7b7);">
+                <span>Paw Partners</span>
+              </div>
+              <div class="work-card-overlay">
+                <div class="work-card-tech">
+                  <span>JavaScript</span><span>React</span>
+                </div>
+                <p class="work-card-outcome">Helping animals find their forever homes</p>
+              </div>
+            </div>
+          </a>
+          <h3>Paw Partners</h3>
+          <p>An animal adoption platform built with React</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SKILLS ========== -->
+  <section class="section section-alt" id="skills">
+    <div class="container">
+      <h2 class="section-label fade-up">Skills</h2>
+      <p class="section-subtitle fade-up">Click any skill to learn more.</p>
+      <div class="skills-grid" id="skills-grid">
+        <!-- Skills are rendered by JS -->
+      </div>
+      <div class="skill-detail" id="skill-detail" hidden>
+        <button class="skill-detail-close" aria-label="Close">&times;</button>
+        <h3 id="skill-detail-title"></h3>
+        <p id="skill-detail-desc"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PLAY & EXPLORE ========== -->
+  <section class="section" id="play">
+    <div class="container">
+      <h2 class="section-label fade-up">Play &amp; Explore</h2>
+      <p class="section-subtitle fade-up">Quick interactive demos that show how I think about the web.</p>
+
+      <div class="game-tabs fade-up">
+        <button class="game-tab active" data-game="bug">Fix the Bug</button>
+        <button class="game-tab" data-game="perf">Performance Optimizer</button>
+        <button class="game-tab" data-game="myths">Web Myths</button>
+      </div>
+
+      <!-- FIX THE BUG -->
+      <div class="game-panel active" id="game-bug">
+        <div class="game-card">
+          <div class="game-header">
+            <h3>Fix the Bug</h3>
+            <p>Find what's wrong in the code snippet and pick the correct fix.</p>
+          </div>
+          <div id="bug-game-area">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- PERFORMANCE OPTIMIZER -->
+      <div class="game-panel" id="game-perf">
+        <div class="game-card">
+          <div class="game-header">
+            <h3>Performance Optimizer</h3>
+            <p>Toggle optimizations and watch the performance score change in real time.</p>
+          </div>
+          <div class="perf-layout">
+            <div class="perf-controls" id="perf-controls">
+              <!-- Rendered by JS -->
+            </div>
+            <div class="perf-score-area">
+              <svg class="perf-ring" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" class="perf-ring-bg"/>
+                <circle cx="60" cy="60" r="52" class="perf-ring-fill" id="perf-ring-fill"/>
+              </svg>
+              <div class="perf-score-text" id="perf-score-text">35</div>
+              <div class="perf-score-label">Performance Score</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEB MYTHS -->
+      <div class="game-panel" id="game-myths">
+        <div class="game-card">
+          <div class="game-header">
+            <h3>True or False?</h3>
+            <p>Test your knowledge of web development and SEO facts.</p>
+          </div>
+          <div id="myths-game-area">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="section section-alt" id="about">
+    <div class="container about-grid">
+      <div class="about-photo fade-up">
+        <div class="about-photo-placeholder">AD</div>
+      </div>
+      <div class="about-text fade-up delay-1">
+        <h2 class="section-label">About Me</h2>
+        <p>
+          I'm Amanda — a software developer with a background in customer service. That means I don't just write code — I build with <em>empathy</em>. I understand what it's like to be on the other side of the screen.
+        </p>
+        <p>
+          I create applications that feel intuitive and solve real problems. Whether it's a full-stack web app or a clean front-end experience, I focus on making things that people actually enjoy using.
+        </p>
+        <p>
+          My goal is to help small businesses and teams succeed online — no jargon, no fluff, just thoughtful solutions that <em>work</em>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="section" id="contact">
+    <div class="container contact-container">
+      <div class="contact-text fade-up">
+        <h2 class="section-label">Let's Work Together</h2>
+        <p>Have a project in mind? I'd love to hear about it. Whether you need a new site, a redesign, or just want to chat about an idea — drop me a line.</p>
+        <p style="margin-top: 16px;">
+          <a href="mailto:andavis98@protonmail.com" class="accent" style="font-weight:600;">andavis98@protonmail.com</a>
+        </p>
+      </div>
+      <form class="contact-form fade-up delay-1" id="contact-form" action="#" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        <p class="form-success" id="form-success" hidden>Thanks! I'll get back to you soon.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>&copy; 2026 amanda<span class="accent">.</span>dev — Built with care.</p>
+      <div class="footer-links">
+        <a href="https://github.com/mandatory777" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+        <a href="https://www.linkedin.com/in/amanda-davis-7687b2221/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
