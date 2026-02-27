@@ -1,7 +1,7 @@
 /* ============================================
    PORTFOLIO — script.js
    Navigation, animations, skills, mini-games,
-   custom cursor & grungy effects
+   custom cursor, work toggles & effects
    ============================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,11 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
   animateRing();
 
   /* Cursor hover state on interactive elements */
-  const hoverTargets = document.querySelectorAll("a, button, input, textarea, .skill-tile, .work-card");
-  hoverTargets.forEach((el) => {
+  function bindCursorHover(el) {
     el.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
     el.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
-  });
+  }
+
+  document.querySelectorAll("a, button, input, textarea, .skill-tile, .work-item").forEach(bindCursorHover);
 
   /* ---------- SCROLL ANIMATIONS ---------- */
   const observer = new IntersectionObserver(
@@ -101,17 +102,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ========================================
+     WORK ITEM TOGGLES
+     ======================================== */
+  document.querySelectorAll(".work-toggle").forEach((btn) => {
+    const article = btn.closest(".work-item");
+    const details = article.querySelector(".work-item-details");
+
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      if (expanded) {
+        details.classList.add("collapsed");
+        btn.setAttribute("aria-expanded", "false");
+        btn.textContent = "+ Expand";
+      } else {
+        details.classList.remove("collapsed");
+        btn.setAttribute("aria-expanded", "true");
+        btn.textContent = "- Collapse";
+      }
+    });
+  });
+
+  /* ========================================
      SKILLS
      ======================================== */
   const skillsData = [
-    { name: "HTML / CSS",    level: 90, desc: "Semantic markup, responsive layouts with Flexbox and Grid, Bootstrap framework. I build clean, accessible front-ends that look great on any device." },
-    { name: "JavaScript",    level: 85, desc: "Vanilla JS, ES6+, DOM manipulation, async patterns. I bring interactivity and dynamic behavior to every project I work on." },
-    { name: "React",         level: 80, desc: "Component architecture, hooks, state management. I build dynamic single-page applications like Paw Partners for real-world use cases." },
-    { name: "Python",        level: 85, desc: "Clean, readable code for web apps and scripting. Python is my go-to for backend logic and rapid prototyping." },
-    { name: "Django",        level: 80, desc: "Full-featured web framework for building robust backends. I used Django to power HobbyHotspot's community features and data layer." },
-    { name: "Java",          level: 75, desc: "Object-oriented programming, Spring framework fundamentals. I'm comfortable with enterprise-grade Java development." },
-    { name: "Spring",        level: 70, desc: "Spring Boot for RESTful APIs and backend services. A solid framework for building scalable, production-ready applications." },
-    { name: "Bootstrap",     level: 85, desc: "Rapid responsive design with Bootstrap's grid system and components. Great for building polished UIs quickly without reinventing the wheel." },
+    { name: "HTML / CSS",    level: 90, color: "#a3e635", desc: "Semantic markup, responsive layouts with Flexbox and Grid, Bootstrap framework. I build clean, accessible front-ends that look great on any device." },
+    { name: "JavaScript",    level: 85, color: "#f59e0b", desc: "Vanilla JS, ES6+, DOM manipulation, async patterns. I bring interactivity and dynamic behavior to every project I work on." },
+    { name: "React",         level: 80, color: "#2dd4bf", desc: "Component architecture, hooks, state management. I build dynamic single-page applications like Paw Partners for real-world use cases." },
+    { name: "Python",        level: 85, color: "#a3e635", desc: "Clean, readable code for web apps and scripting. Python is my go-to for backend logic and rapid prototyping." },
+    { name: "Django",        level: 80, color: "#ff3cac", desc: "Full-featured web framework for building robust backends. I used Django to power HobbyHotspot's community features and data layer." },
+    { name: "Java",          level: 75, color: "#8b5cf6", desc: "Object-oriented programming, Spring framework fundamentals. I'm comfortable with enterprise-grade Java development." },
+    { name: "Spring",        level: 70, color: "#f59e0b", desc: "Spring Boot for RESTful APIs and backend services. A solid framework for building scalable, production-ready applications." },
+    { name: "Bootstrap",     level: 85, color: "#2dd4bf", desc: "Rapid responsive design with Bootstrap's grid system and components. Great for building polished UIs quickly without reinventing the wheel." },
   ];
 
   const skillsGrid = document.getElementById("skills-grid");
@@ -132,11 +154,11 @@ document.addEventListener("DOMContentLoaded", () => {
       <svg class="skill-ring" viewBox="0 0 56 56">
         <circle cx="28" cy="28" r="24" class="skill-ring-bg"/>
         <circle cx="28" cy="28" r="24" class="skill-ring-fill"
-          style="stroke-dasharray:${circumference};stroke-dashoffset:${circumference}"
+          style="stroke:${skill.color};stroke-dasharray:${circumference};stroke-dashoffset:${circumference}"
           data-target="${offset}"/>
       </svg>
       <div class="skill-name">${skill.name}</div>
-      <div class="skill-level">${skill.level}%</div>
+      <div class="skill-level" style="color:${skill.color}">${skill.level}%</div>
     `;
 
     tile.addEventListener("click", () => {
@@ -146,10 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
       skillDetail.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
 
-    /* Cursor hover for dynamically added elements */
-    tile.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
-    tile.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
-
+    bindCursorHover(tile);
     skillsGrid.appendChild(tile);
     observer.observe(tile);
   });
@@ -198,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
      ======================================== */
   const bugChallenges = [
     {
-      code: `<div class="card">\n  <img src="photo.jpg">\n  <h2>Title</h2>\n</div>\n\n.card img {\n  width: <span class="bug-highlight">100%</span>;\n  height: 100%;\n  object-fit: none;\n}`,
+      code: `.card img {\n  width: 100%;\n  height: 100%;\n  object-fit: none;  /* <-- bug */\n}`,
       question: "The image is stretching and looks distorted. What should you change?",
       options: [
         { text: 'object-fit: cover;', correct: true },
@@ -208,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
       explanation: "object-fit: cover ensures the image fills its container while preserving aspect ratio. 'none' applies no fitting, causing distortion when width and height are both set.",
     },
     {
-      code: `function greet(name) {\n  const message = \n    "Hello, " <span class="bug-highlight">+</span> Name;\n  return message;\n}\n\nconsole.log(greet("Amanda"));`,
+      code: `function greet(name) {\n  const message =\n    "Hello, " + Name;  /* <-- bug */\n  return message;\n}\n\nconsole.log(greet("Amanda"));`,
       question: "This function throws a ReferenceError. Which fix is correct?",
       options: [
         { text: 'Change Name to name (lowercase)', correct: true },
@@ -218,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
       explanation: "JavaScript is case-sensitive. The parameter is 'name' but the code references 'Name', which is undefined. Variables must match their declared casing exactly.",
     },
     {
-      code: `<button onclick="submit()">\n  Send\n</button>\n\n<script>\n  function submit() {\n    <span class="bug-highlight">document.forms[0].submit();</span>\n    alert("Sent!");\n  }\n</script>`,
+      code: `<button onclick="submit()">\n  Send\n</button>\n\n<script>\n  function submit() {\n    document.forms[0].submit();  /* <-- bug */\n    alert("Sent!");\n  }\n</script>`,
       question: "The alert never fires. What's the issue?",
       options: [
         { text: 'form.submit() reloads the page before alert runs', correct: true },
@@ -228,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
       explanation: "Calling form.submit() causes a full page navigation, so any code after it never executes. You'd need to use AJAX/fetch or call event.preventDefault() first.",
     },
     {
-      code: `.container {\n  display: flex;\n  <span class="bug-highlight">justify-content: center;</span>\n  align-items: center;\n  height: 100vh;\n}\n/* Child stays at top-left */`,
+      code: `.container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100vh;\n}\n/* Child stays at top-left */`,
       question: "The child element stays at the top-left instead of centering. What's likely wrong?",
       options: [
         { text: 'The child has position: absolute without matching coordinates', correct: true },
@@ -242,6 +261,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let bugIndex = 0;
   let bugScore = 0;
   const bugArea = document.getElementById("bug-game-area");
+  const bugCounter = document.getElementById("bug-counter");
+
+  function updateBugCounter() {
+    if (bugCounter) {
+      bugCounter.textContent = `${bugIndex + 1}/${bugChallenges.length}`;
+    }
+  }
 
   function renderBugChallenge() {
     const c = bugChallenges[bugIndex];
@@ -250,10 +276,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    updateBugCounter();
+
     const dots = bugChallenges
       .map((_, i) => {
         let cls = "bug-dot";
-        if (i < bugIndex) cls += i === bugIndex ? "" : (bugResults[i] ? " done-correct" : " done-wrong");
+        if (i < bugIndex) cls += bugResults[i] ? " done-correct" : " done-wrong";
         if (i === bugIndex) cls += " current";
         return `<div class="${cls}"></div>`;
       })
@@ -386,7 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Color coding */
     let color;
-    if (perfScore >= 90) color = "#b4a7f5";
+    if (perfScore >= 90) color = "#a3e635";
     else if (perfScore >= 50) color = "#f59e0b";
     else color = "#ff3cac";
     perfRingFill.style.stroke = color;
@@ -436,6 +464,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let mythScore = 0;
   const mythResults = [];
   const mythArea = document.getElementById("myths-game-area");
+  const mythCounter = document.getElementById("myth-counter");
+
+  function updateMythCounter() {
+    if (mythCounter) {
+      mythCounter.textContent = `${mythIndex + 1}/${myths.length}`;
+    }
+  }
 
   function renderMyth() {
     const m = myths[mythIndex];
@@ -443,6 +478,8 @@ document.addEventListener("DOMContentLoaded", () => {
       renderMythScore();
       return;
     }
+
+    updateMythCounter();
 
     const dots = myths
       .map((_, i) => {
@@ -531,7 +568,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   contactForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    /* In production, send data to backend here */
     formSuccess.hidden = false;
     contactForm.reset();
     setTimeout(() => {

@@ -6,7 +6,7 @@
   <title>Amanda Davis — Software Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,7 +21,7 @@
   <!-- ========== NAVIGATION ========== -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">amanda<span class="accent">.</span>dev</a>
+      <a href="#" class="nav-logo">amanda<span class="accent-green">.</span>dev</a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -38,20 +38,31 @@
   <!-- ========== HERO ========== -->
   <section class="hero" id="hero">
     <div class="hero-bg-text" aria-hidden="true">CREATIVE DEV</div>
+
+    <!-- Floating decorative shapes -->
+    <div class="shape shape-sq-olive" aria-hidden="true"></div>
+    <div class="shape shape-circle-purple" aria-hidden="true"></div>
+    <div class="shape shape-sq-pink" aria-hidden="true"></div>
+    <div class="shape shape-circle-teal" aria-hidden="true"></div>
+    <div class="shape shape-circle-green" aria-hidden="true"></div>
+    <div class="shape shape-circle-orange" aria-hidden="true"></div>
+
     <div class="hero-content">
       <div class="hero-label fade-up">
-        <span class="tag">Software Developer</span>
+        <span class="tag tag-green">Software Developer</span>
+        <span class="tag tag-pink-outline">Creative Dev</span>
         <span class="tag tag-outline">Based in the US</span>
       </div>
-      <h1 class="hero-title fade-up" data-glitch="I build intuitive websites that solve real problems.">
-        I build intuitive websites<br>
-        that solve <span class="highlight">real problems</span><span class="accent">.</span>
+      <h1 class="hero-title fade-up">
+        I build <span class="underline-green">intuitive</span><br>
+        websites that solve<br>
+        <span class="highlight-pink">real problems</span><span class="accent-green">.</span>
       </h1>
       <p class="hero-subtitle fade-up delay-1">
-        Full-stack developer with a customer service heart — empathy-driven code that people love to use.
+        Full-stack developer with a customer service heart — <span class="text-green">empathy-driven</span> code that people love to use.
       </p>
       <div class="hero-ctas fade-up delay-2">
-        <a href="#work" class="btn btn-primary">
+        <a href="#work" class="btn btn-green">
           <span>View Work</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -67,81 +78,114 @@
   <!-- ========== MARQUEE ========== -->
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span>HTML &bull; CSS &bull; JavaScript &bull; React &bull; Python &bull; Django &bull; Java &bull; Spring &bull; Bootstrap &bull; Git &bull;&nbsp;</span>
-      <span>HTML &bull; CSS &bull; JavaScript &bull; React &bull; Python &bull; Django &bull; Java &bull; Spring &bull; Bootstrap &bull; Git &bull;&nbsp;</span>
+      <span>JAVA <em>//</em> SPRING <em>//</em> BOOTSTRAP <em>//</em> GIT <em>//</em> HTML <em>//</em> CSS <em>//</em> JAVASCRIPT <em>//</em> REACT <em>//</em> PYTHON <em>//</em> DJANGO <em>//</em>&nbsp;</span>
+      <span>JAVA <em>//</em> SPRING <em>//</em> BOOTSTRAP <em>//</em> GIT <em>//</em> HTML <em>//</em> CSS <em>//</em> JAVASCRIPT <em>//</em> REACT <em>//</em> PYTHON <em>//</em> DJANGO <em>//</em>&nbsp;</span>
     </div>
   </div>
 
-  <!-- ========== SELECTED WORK ========== -->
-  <section class="section" id="work">
+  <!-- ========== MANIFESTO ========== -->
+  <section class="section" id="manifesto">
     <div class="container">
       <div class="section-header fade-up">
-        <span class="section-number">01</span>
-        <h2 class="section-label">Selected Work</h2>
+        <span class="section-badge badge-green">00</span>
+        <h2 class="section-title"><em>Manifesto</em></h2>
+      </div>
+      <div class="section-divider divider-green fade-up"></div>
+
+      <div class="manifesto-grid fade-up">
+        <div class="manifesto-text">
+          <p class="drop-cap">Code isn't just logic — it's communication. Every function I write, every component I build, is a conversation with the person on the other side of the screen. I came to development from customer service, and that perspective shapes everything I create.</p>
+          <p>I believe the best software feels invisible. It doesn't demand attention — it simply works, guiding users with quiet confidence. That's the kind of craft I practice: thoughtful, empathetic, and rigorously simple.</p>
+          <p>My work sits at the intersection of design thinking and engineering discipline. I don't just build features — I build trust. Every interaction is an opportunity to make someone's day a little easier, a little more delightful.</p>
+        </div>
+        <div class="manifesto-sidebar">
+          <blockquote class="manifesto-quote">
+            <p>"The best interfaces are the ones you don't notice."</p>
+            <cite>— Design Philosophy</cite>
+          </blockquote>
+          <div class="core-values">
+            <h4>Core Values</h4>
+            <ul>
+              <li><span class="dot dot-green"></span>Empathy-First Development</li>
+              <li><span class="dot dot-pink"></span>Accessible by Default</li>
+              <li><span class="dot dot-orange"></span>Clarity over Cleverness</li>
+              <li><span class="dot dot-blue"></span>Ship with Care</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SELECTED WORK ========== -->
+  <section class="section section-alt" id="work">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-badge badge-green">01</span>
+        <h2 class="section-title">Selected <em>Work</em></h2>
       </div>
       <p class="section-subtitle fade-up">A few projects I'm proud of.</p>
-      <div class="work-grid">
+      <div class="section-divider divider-green fade-up"></div>
 
-        <article class="work-card fade-up" data-tilt>
-          <a href="https://github.com/mandatory777/hobbyhotspot" target="_blank" rel="noopener noreferrer">
-            <div class="work-card-image">
-              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #b4a7f5, #d4c8ff);">
-                <span>HobbyHotspot</span>
-              </div>
-              <div class="work-card-overlay">
-                <div class="work-card-tech">
-                  <span>Python</span><span>Django</span><span>Bootstrap</span>
-                </div>
-                <p class="work-card-outcome">Platform connecting people through shared interests</p>
-              </div>
+      <div class="work-list">
+
+        <article class="work-item fade-up" data-color="green">
+          <div class="work-item-header">
+            <div class="work-item-left">
+              <span class="work-num">01</span>
+              <span class="work-category">Full-Stack Web Application</span>
             </div>
-          </a>
-          <div class="work-card-info">
-            <h3>HobbyHotspot</h3>
-            <p>A community platform connecting people with shared interests</p>
-            <span class="work-card-arrow">&rarr;</span>
+            <div class="work-item-center">
+              <h3><a href="https://github.com/mandatory777/hobbyhotspot" target="_blank" rel="noopener noreferrer">HobbyHotspot <span class="work-arrow">&rarr;</span></a></h3>
+              <p class="work-desc">A community platform connecting people with shared interests</p>
+              <button class="work-toggle" aria-expanded="true">- Collapse</button>
+            </div>
+            <div class="work-item-tags">
+              <span>Python</span><span>Django</span><span>Bootstrap</span>
+            </div>
+          </div>
+          <div class="work-item-details">
+            <p>Platform connecting people through shared interests. Built with Django on the backend with Bootstrap for responsive UI. Features user profiles, interest matching, and community forums.</p>
           </div>
         </article>
 
-        <article class="work-card fade-up delay-1" data-tilt>
-          <a href="https://github.com/mandatory777/goat-project" target="_blank" rel="noopener noreferrer">
-            <div class="work-card-image">
-              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #ff3cac, #ff6b6b);">
-                <span>G.O.A.T</span>
-              </div>
-              <div class="work-card-overlay">
-                <div class="work-card-tech">
-                  <span>HTML</span><span>CSS</span>
-                </div>
-                <p class="work-card-outcome">Clean, responsive front-end showcase</p>
-              </div>
+        <article class="work-item fade-up delay-1" data-color="pink">
+          <div class="work-item-header">
+            <div class="work-item-left">
+              <span class="work-num">02</span>
+              <span class="work-category">Front-End Design</span>
             </div>
-          </a>
-          <div class="work-card-info">
-            <h3>G.O.A.T</h3>
-            <p>A polished HTML &amp; CSS showcase project</p>
-            <span class="work-card-arrow">&rarr;</span>
+            <div class="work-item-center">
+              <h3><a href="https://github.com/mandatory777/goat-project" target="_blank" rel="noopener noreferrer">G.O.A.T <span class="work-arrow">&rarr;</span></a></h3>
+              <p class="work-desc">A polished HTML &amp; CSS showcase project</p>
+              <button class="work-toggle" aria-expanded="true">- Collapse</button>
+            </div>
+            <div class="work-item-tags">
+              <span>HTML</span><span>CSS</span>
+            </div>
+          </div>
+          <div class="work-item-details">
+            <p>Clean, responsive front-end showcase demonstrating modern CSS techniques, layout design, and attention to visual detail.</p>
           </div>
         </article>
 
-        <article class="work-card fade-up delay-2" data-tilt>
-          <a href="https://jetrobertsbcca.github.io/animaladoption/" target="_blank" rel="noopener noreferrer">
-            <div class="work-card-image">
-              <div class="work-card-placeholder" style="background: linear-gradient(135deg, #6366f1, #a78bfa);">
-                <span>Paw Partners</span>
-              </div>
-              <div class="work-card-overlay">
-                <div class="work-card-tech">
-                  <span>JavaScript</span><span>React</span>
-                </div>
-                <p class="work-card-outcome">Helping animals find their forever homes</p>
-              </div>
+        <article class="work-item fade-up delay-2" data-color="orange">
+          <div class="work-item-header">
+            <div class="work-item-left">
+              <span class="work-num">03</span>
+              <span class="work-category">React Application</span>
             </div>
-          </a>
-          <div class="work-card-info">
-            <h3>Paw Partners</h3>
-            <p>An animal adoption platform built with React</p>
-            <span class="work-card-arrow">&rarr;</span>
+            <div class="work-item-center">
+              <h3><a href="https://jetrobertsbcca.github.io/animaladoption/" target="_blank" rel="noopener noreferrer">Paw Partners <span class="work-arrow">&rarr;</span></a></h3>
+              <p class="work-desc">An animal adoption platform built with React</p>
+              <button class="work-toggle" aria-expanded="true">- Collapse</button>
+            </div>
+            <div class="work-item-tags">
+              <span>JavaScript</span><span>React</span>
+            </div>
+          </div>
+          <div class="work-item-details">
+            <p>Helping animals find their forever homes. Built with React featuring dynamic filtering, favorites, and a clean adoption flow.</p>
           </div>
         </article>
 
@@ -150,13 +194,14 @@
   </section>
 
   <!-- ========== SKILLS ========== -->
-  <section class="section section-alt" id="skills">
+  <section class="section" id="skills">
     <div class="container">
       <div class="section-header fade-up">
-        <span class="section-number">02</span>
-        <h2 class="section-label">Skills</h2>
+        <span class="section-badge badge-green">02</span>
+        <h2 class="section-title"><em>Skills</em></h2>
       </div>
       <p class="section-subtitle fade-up">Click any skill to learn more.</p>
+      <div class="section-divider divider-green fade-up"></div>
       <div class="skills-grid" id="skills-grid">
         <!-- Skills are rendered by JS -->
       </div>
@@ -169,13 +214,14 @@
   </section>
 
   <!-- ========== PLAY & EXPLORE ========== -->
-  <section class="section" id="play">
+  <section class="section section-alt" id="play">
     <div class="container">
       <div class="section-header fade-up">
-        <span class="section-number">03</span>
-        <h2 class="section-label">Play & Explore</h2>
+        <span class="section-badge badge-green">03</span>
+        <h2 class="section-title">Play & <em>Explore</em></h2>
       </div>
       <p class="section-subtitle fade-up">Quick interactive demos that show how I think about the web.</p>
+      <div class="section-divider divider-green fade-up"></div>
 
       <div class="game-tabs fade-up">
         <button class="game-tab active" data-game="bug">Fix the Bug</button>
@@ -187,8 +233,7 @@
       <div class="game-panel active" id="game-bug">
         <div class="game-card">
           <div class="game-header">
-            <h3>Fix the Bug</h3>
-            <p>Find what's wrong in the code snippet and pick the correct fix.</p>
+            <h3>Fix the Bug <span class="game-counter" id="bug-counter">1/4</span></h3>
           </div>
           <div id="bug-game-area">
             <!-- Rendered by JS -->
@@ -223,8 +268,7 @@
       <div class="game-panel" id="game-myths">
         <div class="game-card">
           <div class="game-header">
-            <h3>True or False?</h3>
-            <p>Test your knowledge of web development and SEO facts.</p>
+            <h3>True or False? <span class="game-counter" id="myth-counter">1/6</span></h3>
           </div>
           <div id="myths-game-area">
             <!-- Rendered by JS -->
@@ -235,18 +279,22 @@
     </div>
   </section>
 
-  <!-- ========== ABOUT ========== -->
+  <!-- ========== ABOUT ME ========== -->
   <section class="section section-alt" id="about">
     <div class="container about-grid">
       <div class="about-photo fade-up">
-        <img src="profile.jpg" alt="Amanda Davis" class="about-photo-img">
-        <div class="about-photo-sticker" aria-hidden="true">creative coder</div>
+        <div class="about-card">
+          <span class="about-card-code">&lt;/ &gt;</span>
+          <span class="about-card-initial">A</span>
+          <span class="about-card-sticker">Creative Coder</span>
+        </div>
       </div>
       <div class="about-text fade-up delay-1">
         <div class="section-header">
-          <span class="section-number">04</span>
-          <h2 class="section-label">About Me</h2>
+          <span class="section-badge badge-orange">04</span>
+          <h2 class="section-title"><em>About Me</em></h2>
         </div>
+        <div class="section-divider divider-green"></div>
         <p>
           I'm Amanda — a software developer with a background in customer service. That means I don't just write code — I build with <em>empathy</em>. I understand what it's like to be on the other side of the screen.
         </p>
@@ -265,9 +313,10 @@
     <div class="container contact-container">
       <div class="contact-text fade-up">
         <div class="section-header">
-          <span class="section-number">05</span>
-          <h2 class="section-label">Let's Work Together</h2>
+          <span class="section-badge badge-green">05</span>
+          <h2 class="section-title"><em>Let's Work Together</em></h2>
         </div>
+        <div class="section-divider divider-green"></div>
         <p>Have a project in mind? I'd love to hear about it. Whether you need a new site, a redesign, or just want to chat about an idea — drop me a line.</p>
         <p style="margin-top: 16px;">
           <a href="mailto:andavis98@protonmail.com" class="email-link">andavis98@protonmail.com</a>
@@ -286,7 +335,7 @@
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-full">
+        <button type="submit" class="btn btn-green btn-full">
           <span>Send Message</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -298,7 +347,7 @@
   <!-- ========== FOOTER ========== -->
   <footer class="footer">
     <div class="container footer-inner">
-      <p>&copy; 2026 amanda<span class="accent">.</span>dev — Built with care & caffeine.</p>
+      <p>&copy; 2026 amanda<span class="accent-green">.</span>dev — Built with care & caffeine.</p>
       <div class="footer-links">
         <a href="https://github.com/mandatory777" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
         <a href="https://www.linkedin.com/in/amanda-davis-7687b2221/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
