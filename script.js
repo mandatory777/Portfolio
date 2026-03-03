@@ -362,67 +362,214 @@ document.addEventListener("DOMContentLoaded", () => {
   renderBugChallenge();
 
   /* ========================================
-     GAME 2 — PERFORMANCE OPTIMIZER
+     GAME 2 — PAGE BUILDER (DRAG & DROP)
      ======================================== */
-  const perfOptions = [
-    { label: "Compress images (WebP)", points: 15, tip: "WebP images are 25-35% smaller than JPEG at equivalent quality." },
-    { label: "Enable lazy loading", points: 12, tip: "Only load images when they enter the viewport, saving initial bandwidth." },
-    { label: "Minify CSS & JS", points: 10, tip: "Remove whitespace and shorten variable names to reduce file sizes by 20-40%." },
-    { label: "Use a CDN", points: 10, tip: "Serve assets from edge servers closest to your user for faster delivery." },
-    { label: "Enable browser caching", points: 8, tip: "Return visitors load cached assets instantly instead of re-downloading." },
-    { label: "Defer non-critical JS", points: 8, tip: "Let the page render first, then load scripts that aren't needed immediately." },
-    { label: "Remove unused CSS", points: 5, tip: "Eliminate dead CSS rules to reduce render-blocking stylesheet size." },
-    { label: "Preconnect to origins", points: 3, tip: "Establish early connections to third-party domains to reduce DNS/TLS time." },
+  const builderComponents = [
+    { id: "navbar", label: "Navbar", icon: "\u2261", tag: "<nav>" },
+    { id: "hero", label: "Hero Section", icon: "\u2605", tag: "<header>" },
+    { id: "cards", label: "Content Cards", icon: "\u25A1", tag: "<section>" },
+    { id: "cta", label: "Call to Action", icon: "\u25B6", tag: "<footer>" },
   ];
+  const correctOrder = ["navbar", "hero", "cards", "cta"];
 
-  const baseScore = 35;
-  let perfScore = baseScore;
-  const perfControls = document.getElementById("perf-controls");
-  const perfRingFill = document.getElementById("perf-ring-fill");
-  const perfScoreText = document.getElementById("perf-score-text");
-  const ringCircumference = 2 * Math.PI * 52;
+  const builderPieces = document.getElementById("builder-pieces");
+  const builderPreview = document.getElementById("builder-preview");
+  const builderScore = document.getElementById("builder-score");
+  const builderCounter = document.getElementById("builder-counter");
+  const dropzones = builderPreview.querySelectorAll(".builder-dropzone");
+  let draggedId = null;
 
-  perfOptions.forEach((opt, i) => {
-    const div = document.createElement("div");
-    div.className = "perf-toggle";
-    div.innerHTML = `
-      <div>
-        <div class="perf-toggle-label">${opt.label}</div>
-        <div class="perf-toggle-points">+${opt.points} points</div>
-      </div>
-      <label class="switch">
-        <input type="checkbox" data-points="${opt.points}" data-idx="${i}" aria-label="${opt.label}">
-        <span class="switch-slider"></span>
-      </label>
-    `;
-    perfControls.appendChild(div);
-  });
-
-  function updatePerfScore() {
-    const checks = perfControls.querySelectorAll('input[type="checkbox"]');
-    let total = baseScore;
-    checks.forEach((cb) => {
-      if (cb.checked) total += parseInt(cb.dataset.points);
-      cb.closest(".perf-toggle").classList.toggle("active", cb.checked);
-    });
-    perfScore = Math.min(total, 100);
-    perfScoreText.textContent = perfScore;
-
-    /* Update ring */
-    const offset = ringCircumference - (perfScore / 100) * ringCircumference;
-    perfRingFill.style.strokeDashoffset = offset;
-
-    /* Color coding */
-    let color;
-    if (perfScore >= 90) color = "#a3e635";
-    else if (perfScore >= 50) color = "#f59e0b";
-    else color = "#ff3cac";
-    perfRingFill.style.stroke = color;
-    perfScoreText.style.color = color;
+  function shuffleArray(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
   }
 
-  perfControls.addEventListener("change", updatePerfScore);
-  updatePerfScore(); // initial
+  function initBuilder() {
+    builderPieces.innerHTML = "";
+    const shuffled = shuffleArray(builderComponents);
+    shuffled.forEach((comp) => {
+      const div = document.createElement("div");
+      div.className = "builder-piece";
+      div.draggable = true;
+      div.dataset.id = comp.id;
+      div.innerHTML = `
+        <span class="builder-piece-icon">${comp.icon}</span>
+        <span class="builder-piece-label">${comp.label}</span>
+        <span class="builder-piece-tag">${comp.tag}</span>
+      `;
+      builderPieces.appendChild(div);
+    });
+
+    dropzones.forEach((dz, i) => {
+      dz.classList.remove("filled", "correct", "wrong");
+      dz.removeAttribute("data-filled");
+      dz.removeAttribute("data-component");
+      dz.setAttribute("data-label", `Slot ${i + 1}`);
+    });
+
+    builderScore.textContent = "";
+    builderScore.className = "builder-score";
+    builderCounter.textContent = "0/4";
+  }
+
+  /* Drag events on pieces */
+  builderPieces.addEventListener("dragstart", (e) => {
+    const piece = e.target.closest(".builder-piece");
+    if (!piece) return;
+    draggedId = piece.dataset.id;
+    piece.classList.add("dragging");
+  });
+
+  builderPieces.addEventListener("dragend", (e) => {
+    const piece = e.target.closest(".builder-piece");
+    if (piece) piece.classList.remove("dragging");
+    draggedId = null;
+  });
+
+  /* Touch support */
+  let touchPiece = null;
+  let touchClone = null;
+
+  builderPieces.addEventListener("touchstart", (e) => {
+    const piece = e.target.closest(".builder-piece");
+    if (!piece) return;
+    touchPiece = piece;
+    draggedId = piece.dataset.id;
+    piece.classList.add("dragging");
+
+    touchClone = piece.cloneNode(true);
+    touchClone.style.position = "fixed";
+    touchClone.style.pointerEvents = "none";
+    touchClone.style.zIndex = "9999";
+    touchClone.style.opacity = "0.8";
+    touchClone.style.width = piece.offsetWidth + "px";
+    document.body.appendChild(touchClone);
+
+    const touch = e.touches[0];
+    touchClone.style.left = touch.clientX - piece.offsetWidth / 2 + "px";
+    touchClone.style.top = touch.clientY - 20 + "px";
+  }, { passive: true });
+
+  document.addEventListener("touchmove", (e) => {
+    if (!touchClone) return;
+    const touch = e.touches[0];
+    touchClone.style.left = touch.clientX - touchClone.offsetWidth / 2 + "px";
+    touchClone.style.top = touch.clientY - 20 + "px";
+
+    dropzones.forEach((dz) => {
+      const rect = dz.getBoundingClientRect();
+      if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+          touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+        dz.classList.add("drag-over");
+      } else {
+        dz.classList.remove("drag-over");
+      }
+    });
+  }, { passive: true });
+
+  document.addEventListener("touchend", (e) => {
+    if (!touchClone || !touchPiece) return;
+    const touch = e.changedTouches[0];
+
+    dropzones.forEach((dz) => {
+      dz.classList.remove("drag-over");
+      const rect = dz.getBoundingClientRect();
+      if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+          touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+        if (!dz.dataset.component) {
+          placeComponent(dz, draggedId);
+        }
+      }
+    });
+
+    touchPiece.classList.remove("dragging");
+    touchClone.remove();
+    touchClone = null;
+    touchPiece = null;
+    draggedId = null;
+  });
+
+  /* Drop events on zones */
+  dropzones.forEach((dz) => {
+    dz.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      if (!dz.dataset.component) dz.classList.add("drag-over");
+    });
+    dz.addEventListener("dragleave", () => dz.classList.remove("drag-over"));
+    dz.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dz.classList.remove("drag-over");
+      if (draggedId && !dz.dataset.component) {
+        placeComponent(dz, draggedId);
+      }
+    });
+  });
+
+  function placeComponent(dz, compId) {
+    const comp = builderComponents.find((c) => c.id === compId);
+    if (!comp) return;
+
+    dz.dataset.component = compId;
+    dz.dataset.filled = `${comp.icon}  ${comp.label}`;
+    dz.classList.add("filled");
+    dz.removeAttribute("data-label");
+
+    /* Remove piece from source */
+    const piece = builderPieces.querySelector(`[data-id="${compId}"]`);
+    if (piece) piece.remove();
+
+    checkBuilderScore();
+  }
+
+  function checkBuilderScore() {
+    const placed = [];
+    dropzones.forEach((dz) => {
+      if (dz.dataset.component) placed.push(dz.dataset.component);
+    });
+
+    builderCounter.textContent = `${placed.length}/4`;
+
+    if (placed.length < 4) {
+      builderScore.textContent = "";
+      return;
+    }
+
+    /* Score it */
+    let correct = 0;
+    dropzones.forEach((dz, i) => {
+      if (dz.dataset.component === correctOrder[i]) {
+        dz.classList.add("correct");
+        correct++;
+      } else {
+        dz.classList.add("wrong");
+      }
+    });
+
+    if (correct === 4) {
+      builderScore.textContent = "UX Score: 100 — Perfect layout!";
+      builderScore.className = "builder-score perfect";
+    } else if (correct >= 2) {
+      builderScore.textContent = `UX Score: ${correct * 25} — Almost there!`;
+      builderScore.className = "builder-score partial";
+    } else {
+      builderScore.textContent = `UX Score: ${correct * 25} — Bad UX, try again!`;
+      builderScore.className = "builder-score bad";
+    }
+
+    /* Add reset button */
+    const btn = document.createElement("button");
+    btn.className = "builder-reset";
+    btn.textContent = "Try Again";
+    btn.addEventListener("click", initBuilder);
+    builderScore.appendChild(document.createElement("br"));
+    builderScore.appendChild(btn);
+  }
+
+  initBuilder();
 
   /* ========================================
      GAME 3 — WEB MYTHS (TRUE / FALSE)

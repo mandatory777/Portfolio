@@ -225,7 +225,7 @@
 
       <div class="game-tabs fade-up">
         <button class="game-tab active" data-game="bug">Fix the Bug</button>
-        <button class="game-tab" data-game="perf">Performance Optimizer</button>
+        <button class="game-tab" data-game="builder">Page Builder</button>
         <button class="game-tab" data-game="myths">Web Myths</button>
       </div>
 
@@ -241,24 +241,25 @@
         </div>
       </div>
 
-      <!-- PERFORMANCE OPTIMIZER -->
-      <div class="game-panel" id="game-perf">
+      <!-- PAGE BUILDER -->
+      <div class="game-panel" id="game-builder">
         <div class="game-card">
           <div class="game-header">
-            <h3>Performance Optimizer</h3>
-            <p>Toggle optimizations and watch the performance score change in real time.</p>
+            <h3>Page Builder <span class="game-counter" id="builder-counter">0/4</span></h3>
+            <p>Drag the components into the correct order to build a proper webpage.</p>
           </div>
-          <div class="perf-layout">
-            <div class="perf-controls" id="perf-controls">
+          <div class="builder-layout">
+            <div class="builder-pieces" id="builder-pieces">
               <!-- Rendered by JS -->
             </div>
-            <div class="perf-score-area">
-              <svg class="perf-ring" viewBox="0 0 120 120">
-                <circle cx="60" cy="60" r="52" class="perf-ring-bg"/>
-                <circle cx="60" cy="60" r="52" class="perf-ring-fill" id="perf-ring-fill"/>
-              </svg>
-              <div class="perf-score-text" id="perf-score-text">35</div>
-              <div class="perf-score-label">Performance Score</div>
+            <div class="builder-preview-area">
+              <div class="builder-preview" id="builder-preview">
+                <div class="builder-dropzone" data-slot="0"></div>
+                <div class="builder-dropzone" data-slot="1"></div>
+                <div class="builder-dropzone" data-slot="2"></div>
+                <div class="builder-dropzone" data-slot="3"></div>
+              </div>
+              <div class="builder-score" id="builder-score"></div>
             </div>
           </div>
         </div>
