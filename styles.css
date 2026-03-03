@@ -1543,8 +1543,8 @@ body.cursor-hover .cursor-ring {
 
 .about-card-code {
   position: absolute;
-  top: -12px;
-  left: 16px;
+  top: 12px;
+  left: 12px;
   background: var(--green);
   color: var(--bg);
   font-family: var(--font-mono);
@@ -1552,6 +1552,8 @@ body.cursor-hover .cursor-ring {
   font-weight: 700;
   padding: 4px 10px;
   border-radius: 4px;
+  z-index: 2;
+  transform: rotate(-2deg);
 }
 
 .about-card-img {
@@ -1588,8 +1590,8 @@ body.cursor-hover .cursor-ring {
 
 .about-card-sticker {
   position: absolute;
-  bottom: -12px;
-  right: -16px;
+  bottom: 12px;
+  right: 12px;
   padding: 8px 16px;
   background: var(--pink);
   color: #fff;
@@ -1600,6 +1602,7 @@ body.cursor-hover .cursor-ring {
   letter-spacing: 0.05em;
   transform: rotate(2deg);
   border-radius: 4px;
+  z-index: 2;
 }
 
 .about-text p {
