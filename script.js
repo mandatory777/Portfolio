@@ -362,7 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderBugChallenge();
 
   /* ========================================
-     GAME 2 — PAGE BUILDER (DRAG & DROP)
+     GAME 2 — PAGE BUILDER (CLICK TO PLACE)
      ======================================== */
   const builderComponents = [
     { id: "navbar", label: "Navbar", icon: "\u2261", tag: "<nav>" },
@@ -377,7 +377,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const builderScore = document.getElementById("builder-score");
   const builderCounter = document.getElementById("builder-counter");
   const dropzones = builderPreview.querySelectorAll(".builder-dropzone");
-  let draggedId = null;
+  let selectedPiece = null;
+  let builderLocked = false;
 
   function shuffleArray(arr) {
     const a = [...arr];
@@ -390,11 +391,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function initBuilder() {
     builderPieces.innerHTML = "";
+    selectedPiece = null;
+    builderLocked = false;
     const shuffled = shuffleArray(builderComponents);
     shuffled.forEach((comp) => {
       const div = document.createElement("div");
       div.className = "builder-piece";
-      div.draggable = true;
       div.dataset.id = comp.id;
       div.innerHTML = `
         <span class="builder-piece-icon">${comp.icon}</span>
@@ -405,7 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     dropzones.forEach((dz, i) => {
-      dz.classList.remove("filled", "correct", "wrong");
+      dz.classList.remove("filled", "correct", "wrong", "drag-over");
       dz.removeAttribute("data-filled");
       dz.removeAttribute("data-component");
       dz.setAttribute("data-label", `Slot ${i + 1}`);
@@ -416,127 +418,97 @@ document.addEventListener("DOMContentLoaded", () => {
     builderCounter.textContent = "0/4";
   }
 
-  /* Drag events on pieces */
-  builderPieces.addEventListener("dragstart", (e) => {
+  /* Click a piece to select it */
+  builderPieces.addEventListener("click", (e) => {
+    if (builderLocked) return;
     const piece = e.target.closest(".builder-piece");
     if (!piece) return;
-    draggedId = piece.dataset.id;
-    piece.classList.add("dragging");
-  });
 
-  builderPieces.addEventListener("dragend", (e) => {
-    const piece = e.target.closest(".builder-piece");
-    if (piece) piece.classList.remove("dragging");
-    draggedId = null;
-  });
+    /* Deselect if clicking same piece */
+    if (selectedPiece === piece) {
+      piece.classList.remove("selected");
+      selectedPiece = null;
+      dropzones.forEach((dz) => dz.classList.remove("drag-over"));
+      return;
+    }
 
-  /* Touch support */
-  let touchPiece = null;
-  let touchClone = null;
+    /* Select new piece */
+    builderPieces.querySelectorAll(".builder-piece").forEach((p) => p.classList.remove("selected"));
+    piece.classList.add("selected");
+    selectedPiece = piece;
 
-  builderPieces.addEventListener("touchstart", (e) => {
-    const piece = e.target.closest(".builder-piece");
-    if (!piece) return;
-    touchPiece = piece;
-    draggedId = piece.dataset.id;
-    piece.classList.add("dragging");
-
-    touchClone = piece.cloneNode(true);
-    touchClone.style.position = "fixed";
-    touchClone.style.pointerEvents = "none";
-    touchClone.style.zIndex = "9999";
-    touchClone.style.opacity = "0.8";
-    touchClone.style.width = piece.offsetWidth + "px";
-    document.body.appendChild(touchClone);
-
-    const touch = e.touches[0];
-    touchClone.style.left = touch.clientX - piece.offsetWidth / 2 + "px";
-    touchClone.style.top = touch.clientY - 20 + "px";
-  }, { passive: true });
-
-  document.addEventListener("touchmove", (e) => {
-    if (!touchClone) return;
-    const touch = e.touches[0];
-    touchClone.style.left = touch.clientX - touchClone.offsetWidth / 2 + "px";
-    touchClone.style.top = touch.clientY - 20 + "px";
-
+    /* Highlight available slots */
     dropzones.forEach((dz) => {
-      const rect = dz.getBoundingClientRect();
-      if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
-          touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+      if (!dz.dataset.component) {
         dz.classList.add("drag-over");
-      } else {
-        dz.classList.remove("drag-over");
       }
     });
-  }, { passive: true });
-
-  document.addEventListener("touchend", (e) => {
-    if (!touchClone || !touchPiece) return;
-    const touch = e.changedTouches[0];
-
-    dropzones.forEach((dz) => {
-      dz.classList.remove("drag-over");
-      const rect = dz.getBoundingClientRect();
-      if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
-          touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
-        if (!dz.dataset.component) {
-          placeComponent(dz, draggedId);
-        }
-      }
-    });
-
-    touchPiece.classList.remove("dragging");
-    touchClone.remove();
-    touchClone = null;
-    touchPiece = null;
-    draggedId = null;
   });
 
-  /* Drop events on zones */
+  /* Click a slot to place the selected piece */
   dropzones.forEach((dz) => {
-    dz.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      if (!dz.dataset.component) dz.classList.add("drag-over");
-    });
-    dz.addEventListener("dragleave", () => dz.classList.remove("drag-over"));
-    dz.addEventListener("drop", (e) => {
-      e.preventDefault();
-      dz.classList.remove("drag-over");
-      if (draggedId && !dz.dataset.component) {
-        placeComponent(dz, draggedId);
+    dz.addEventListener("click", () => {
+      if (builderLocked) return;
+
+      /* If slot is filled and no piece selected, pop it back */
+      if (dz.dataset.component && !selectedPiece) {
+        const compId = dz.dataset.component;
+        const comp = builderComponents.find((c) => c.id === compId);
+        dz.classList.remove("filled", "correct", "wrong");
+        dz.removeAttribute("data-filled");
+        dz.removeAttribute("data-component");
+        dz.setAttribute("data-label", `Slot ${parseInt(dz.dataset.slot) + 1}`);
+
+        /* Add piece back */
+        const div = document.createElement("div");
+        div.className = "builder-piece";
+        div.dataset.id = comp.id;
+        div.innerHTML = `
+          <span class="builder-piece-icon">${comp.icon}</span>
+          <span class="builder-piece-label">${comp.label}</span>
+          <span class="builder-piece-tag">${comp.tag}</span>
+        `;
+        builderPieces.appendChild(div);
+        updateBuilderCounter();
+        return;
       }
+
+      /* Place selected piece in empty slot */
+      if (!selectedPiece || dz.dataset.component) return;
+
+      const compId = selectedPiece.dataset.id;
+      const comp = builderComponents.find((c) => c.id === compId);
+      if (!comp) return;
+
+      dz.dataset.component = compId;
+      dz.dataset.filled = `${comp.icon}  ${comp.label}`;
+      dz.classList.add("filled");
+      dz.removeAttribute("data-label");
+
+      /* Remove piece from source */
+      selectedPiece.remove();
+      selectedPiece = null;
+
+      /* Clear highlights */
+      dropzones.forEach((z) => z.classList.remove("drag-over"));
+
+      updateBuilderCounter();
+      checkBuilderScore();
     });
   });
 
-  function placeComponent(dz, compId) {
-    const comp = builderComponents.find((c) => c.id === compId);
-    if (!comp) return;
-
-    dz.dataset.component = compId;
-    dz.dataset.filled = `${comp.icon}  ${comp.label}`;
-    dz.classList.add("filled");
-    dz.removeAttribute("data-label");
-
-    /* Remove piece from source */
-    const piece = builderPieces.querySelector(`[data-id="${compId}"]`);
-    if (piece) piece.remove();
-
-    checkBuilderScore();
+  function updateBuilderCounter() {
+    let placed = 0;
+    dropzones.forEach((dz) => { if (dz.dataset.component) placed++; });
+    builderCounter.textContent = `${placed}/4`;
   }
 
   function checkBuilderScore() {
-    const placed = [];
-    dropzones.forEach((dz) => {
-      if (dz.dataset.component) placed.push(dz.dataset.component);
-    });
+    let placed = 0;
+    dropzones.forEach((dz) => { if (dz.dataset.component) placed++; });
+    if (placed < 4) return;
 
-    builderCounter.textContent = `${placed.length}/4`;
-
-    if (placed.length < 4) {
-      builderScore.textContent = "";
-      return;
-    }
+    builderLocked = true;
 
     /* Score it */
     let correct = 0;

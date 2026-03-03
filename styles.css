@@ -1247,13 +1247,8 @@ body.cursor-hover .cursor-ring {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 700;
-  cursor: grab;
   user-select: none;
   transition: all var(--transition);
-}
-
-.builder-piece:active {
-  cursor: grabbing;
 }
 
 .builder-piece:hover {
@@ -1261,8 +1256,10 @@ body.cursor-hover .cursor-ring {
   background: rgba(255,255,255,0.04);
 }
 
-.builder-piece.dragging {
-  opacity: 0.4;
+.builder-piece.selected {
+  border-color: var(--green);
+  background: rgba(163, 230, 53, 0.08);
+  box-shadow: 0 0 0 1px var(--green);
 }
 
 .builder-piece-icon {
