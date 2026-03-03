@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
 
     const optionsHTML = c.options
-      .map((o, i) => `<button class="bug-option" data-idx="${i}">${o.text}</button>`)
+      .map((o, i) => `<button type="button" class="bug-option" data-idx="${i}">${o.text}</button>`)
       .join("");
 
     bugArea.innerHTML = `
@@ -330,6 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bugArea.appendChild(feedbackDiv);
 
     const nextBtn = document.createElement("button");
+    nextBtn.type = "button";
     nextBtn.className = "bug-next-btn";
     nextBtn.textContent = bugIndex < bugChallenges.length - 1 ? "Next Challenge" : "See Results";
     nextBtn.addEventListener("click", () => {
@@ -348,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="bug-score">
         <h4>${bugScore} / ${bugChallenges.length} Correct</h4>
         <p>${msg}</p>
-        <button class="bug-restart-btn">Play Again</button>
+        <button type="button" class="bug-restart-btn">Play Again</button>
       </div>
     `;
     bugArea.querySelector(".bug-restart-btn").addEventListener("click", () => {
@@ -395,15 +396,16 @@ document.addEventListener("DOMContentLoaded", () => {
     builderLocked = false;
     const shuffled = shuffleArray(builderComponents);
     shuffled.forEach((comp) => {
-      const div = document.createElement("div");
-      div.className = "builder-piece";
-      div.dataset.id = comp.id;
-      div.innerHTML = `
+      const btn = document.createElement("button");
+      btn.className = "builder-piece";
+      btn.type = "button";
+      btn.dataset.id = comp.id;
+      btn.innerHTML = `
         <span class="builder-piece-icon">${comp.icon}</span>
         <span class="builder-piece-label">${comp.label}</span>
         <span class="builder-piece-tag">${comp.tag}</span>
       `;
-      builderPieces.appendChild(div);
+      builderPieces.appendChild(btn);
     });
 
     dropzones.forEach((dz, i) => {
@@ -460,15 +462,16 @@ document.addEventListener("DOMContentLoaded", () => {
         dz.setAttribute("data-label", `Slot ${parseInt(dz.dataset.slot) + 1}`);
 
         /* Add piece back */
-        const div = document.createElement("div");
-        div.className = "builder-piece";
-        div.dataset.id = comp.id;
-        div.innerHTML = `
+        const btn = document.createElement("button");
+        btn.className = "builder-piece";
+        btn.type = "button";
+        btn.dataset.id = comp.id;
+        btn.innerHTML = `
           <span class="builder-piece-icon">${comp.icon}</span>
           <span class="builder-piece-label">${comp.label}</span>
           <span class="builder-piece-tag">${comp.tag}</span>
         `;
-        builderPieces.appendChild(div);
+        builderPieces.appendChild(btn);
         updateBuilderCounter();
         return;
       }
@@ -534,6 +537,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Add reset button */
     const btn = document.createElement("button");
+    btn.type = "button";
     btn.className = "builder-reset";
     btn.textContent = "Try Again";
     btn.addEventListener("click", initBuilder);
@@ -613,8 +617,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="myth-progress">${dots}</div>
       <p class="myth-statement">"${m.statement}"</p>
       <div class="myth-buttons">
-        <button class="myth-btn" data-answer="true">True</button>
-        <button class="myth-btn" data-answer="false">False</button>
+        <button type="button" class="myth-btn" data-answer="true">True</button>
+        <button type="button" class="myth-btn" data-answer="false">False</button>
       </div>
     `;
 
@@ -648,6 +652,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mythArea.appendChild(feedbackDiv);
 
     const nextBtn = document.createElement("button");
+    nextBtn.type = "button";
     nextBtn.className = "myth-next-btn";
     nextBtn.textContent = mythIndex < myths.length - 1 ? "Next Statement" : "See Results";
     nextBtn.addEventListener("click", () => {
@@ -666,7 +671,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="myth-score">
         <h4>${mythScore} / ${myths.length} Correct</h4>
         <p>${msg}</p>
-        <button class="myth-restart-btn">Play Again</button>
+        <button type="button" class="myth-restart-btn">Play Again</button>
       </div>
     `;
     mythArea.querySelector(".myth-restart-btn").addEventListener("click", () => {

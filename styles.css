@@ -1299,6 +1299,7 @@ body.cursor-hover .cursor-ring {
 
 .builder-dropzone {
   flex: 1;
+  width: 100%;
   border: 1px dashed rgba(255,255,255,0.1);
   border-radius: 3px;
   display: flex;
@@ -1312,6 +1313,8 @@ body.cursor-hover .cursor-ring {
   transition: all var(--transition);
   min-height: 48px;
   position: relative;
+  padding: 8px;
+  background: transparent;
 }
 
 .builder-dropzone::before {
@@ -1847,10 +1850,6 @@ body.cursor-hover .cursor-ring {
   .builder-layout {
     grid-template-columns: 1fr;
     gap: 24px;
-  }
-
-  .builder-preview-area {
-    order: -1;
   }
 
   .about-grid {
