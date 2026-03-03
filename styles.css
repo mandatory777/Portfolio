@@ -1525,11 +1525,7 @@ body.cursor-hover .cursor-ring {
   height: 380px;
   background: var(--surface);
   border: 2px dashed var(--pink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: 8px;
-  overflow: hidden;
 }
 
 .about-card::before {
@@ -1543,8 +1539,8 @@ body.cursor-hover .cursor-ring {
 
 .about-card-code {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: -10px;
+  left: 16px;
   background: var(--green);
   color: var(--bg);
   font-family: var(--font-mono);
@@ -1557,6 +1553,8 @@ body.cursor-hover .cursor-ring {
 }
 
 .about-card-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1590,8 +1588,8 @@ body.cursor-hover .cursor-ring {
 
 .about-card-sticker {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
+  bottom: -10px;
+  right: -12px;
   padding: 8px 16px;
   background: var(--pink);
   color: #fff;
