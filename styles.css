@@ -1560,6 +1560,21 @@ body.cursor-hover .cursor-ring {
   object-fit: cover;
   object-position: center top;
   border-radius: 6px;
+  filter: contrast(1.05) brightness(0.95) saturate(0.85);
+  mix-blend-mode: luminosity;
+}
+
+.about-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(163, 230, 53, 0.08),
+    rgba(255, 60, 172, 0.06)
+  );
+  border-radius: 6px;
+  pointer-events: none;
 }
 
 .about-card-initial {
