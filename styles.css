@@ -1529,6 +1529,7 @@ body.cursor-hover .cursor-ring {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .about-card::before {
